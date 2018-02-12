@@ -1,7 +1,7 @@
 {
-  "name": "whetu-render-engine",
+  "name": "whetu-client",
   "version": "0.1.0",
-  "description": "Render Engine for Whetu",
+  "description": "Client for Whetu",
   "main": "index.js",
   "scripts": {
     "clean": "shx rm -rf public/**",
@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ajaxscape/whetu-render-engine.git"
+    "url": "git+https://github.com/ajaxscape/whetu-client.git"
   },
   "author": "Ben Surgison",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ajaxscape/whetu-render-engine/issues"
+    "url": "https://github.com/ajaxscape/whetu-client/issues"
   },
-  "homepage": "https://github.com/ajaxscape/whetu-render-engine#readme"
+  "homepage": "https://github.com/ajaxscape/whetu-client#readme"
 }

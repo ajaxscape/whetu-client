@@ -1,0 +1,191 @@
+// variables
+$grid-rows: 100;
+$grid-columns: 100;
+$cell-width: 300px;
+$cell-height: 300px;
+
+$spacecraft-width: 120px;
+$spacecraft-height: 120px;
+
+$meteor-width: 88px;
+$meteor-height: 88px;
+
+body {
+  margin: 0;
+}
+
+#viewport {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin: 0;
+  overflow: hidden;
+  .body-container {
+    position: absolute;
+    .name {
+      font-weight: bold;
+      font-size: 2rem;
+      color: rgba(255, 255, 100, 0.75);
+      width: 100%;
+      text-align: center;
+    }
+    .body {
+      &::before, &::after {
+        content: " ";
+        position: absolute;
+      }
+      &.spacecraft {
+        width: $spacecraft-width * 0.9;
+        height: $spacecraft-height * 0.9;
+        border-radius: $spacecraft-width * 0.45;
+        &.after-burner {
+          box-shadow: 0 50px 60px rgba(150, 255, 0, 0.5);
+        }
+        &::before {
+          background-image: url("assets/images/floating-objects/spacecraft.png");
+          background-size: contain;
+          margin: 4px;
+          width: 100px;
+          height: 100px;
+        }
+        &.shield::after, &.collision::after, &.explosion::after {
+          width: $spacecraft-width;
+          height: $spacecraft-height;
+          margin-top: -6%;
+          margin-left: -6%;
+          border-radius: 50%;
+        }
+        &.shield::after {
+          border: solid 1px rgba(150, 150, 255, 0.5);
+          background-color: rgba(100, 200, 255, 0.2);
+          box-shadow: 0 0 34px rgba(140, 140, 255, 1);
+        }
+        &.collision::after, &.explosion::after {
+          border: solid 1px rgba(255, 255, 100, 0.5);
+          box-shadow: 0 0 34px rgba(255, 87, 0, 1);
+        }
+        &.destroyed::after {
+          background-color: rgba(255, 0, 0, 0.45);
+          box-shadow: 0 0 100px rgba(255, 87, 0, 1);
+        }
+        &.shuttle {
+          &.after-burner {
+            box-shadow: 0 50px 60px rgba(255, 100, 0, 0.5);
+          }
+          &::before {
+            background-image: url("assets/images/floating-objects/opponent.png");
+          }
+          &.player::before {
+            background-image: url("assets/images/floating-objects/shuttle.png");
+          }
+        }
+        &.spooky {
+          &.after-burner {
+            box-shadow: 0 50px 60px rgba(150, 0, 255, 0.5);
+          }
+          &::before {
+            background-image: url("assets/images/floating-objects/yelship.png");
+          }
+        }
+      }
+
+      &.meteor {
+        width: $meteor-width;
+        height: $meteor-height;
+        border-radius: 50%;
+        background-image: url("assets/images/floating-objects/star.jpeg");
+        background-size: contain;
+      }
+
+      &.bolt {
+        width: 2px;
+        height: 12px;
+        background-color: rgba(255, 100, 100, 0.75);
+        box-shadow: 0 0 100px rgba(255, 255, 255, 1);
+        &::before {
+          width: 2px;
+          height: 5px;
+          background-color: rgba(255, 255, 00, 1);
+          box-shadow: 0 0 34px rgba(140, 140, 255, 1);
+        }
+        &::after {
+          margin-top: 2px;
+          width: 2px;
+          height: 5px;
+          background-color: rgba(255, 100, 100, 1);
+          box-shadow: 0 0 34px rgba(140, 140, 255, 1);
+        }
+      }
+    }
+  }
+}
+
+#info {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  #energy-bar {
+    height: 40px;
+    background-color: rgba(255, 50, 150, 0.35);
+  }
+}
+
+#score {
+  position: absolute;
+  color: yellow;
+  font-size: 4em;
+  #score-val {
+    font-weight: bold;
+  }
+}
+
+#radar {
+  margin: 15px;
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 250px;
+  background: rgba(100, 0, 255, 0.5);
+  opacity: 0.5;
+  border: 1px solid orange;
+  overflow: hidden;
+  &.visible {
+    display: block;
+  }
+  .body {
+    position: absolute;
+    background: transparent;
+    width: 7px;
+    height: 7px;
+    border-radius: 7px;
+    border: 1px black solid;
+    &.spacecraft {
+      background: lightgreen;
+      &.shuttle {
+        background: yellow;
+        &.player {
+          background: darkorange;
+          z-index: 100;
+        }
+      }
+      .name {
+        color: rgba(255, 100, 00, 0.5);
+        position: absolute;
+      }
+    }
+  }
+}
+
+#starfield {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}

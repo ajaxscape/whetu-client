@@ -1,0 +1,8 @@
+# Jetbrains
+.idea
+
+# node modules
+node_modules
+
+# build
+public

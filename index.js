@@ -1,4 +1,5 @@
 const Render = require('whetu-render')
+const ws = require('ws')
 
 // event emmited when connected
 ws.onopen = function () {

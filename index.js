@@ -1,5 +1,7 @@
 const Render = require('whetu-render')
-const ws = require('ws')
+const service = window.expanse.config
+// eslint-disable-next-line no-undef
+const ws = new WebSocket(service)
 
 // event emmited when connected
 ws.onopen = function () {
@@ -19,14 +21,8 @@ ws.onmessage = (ev) => {
       break
     }
     case 'state': {
-      const now = Date.now()
       data.forEach((_data) => {
         Render.updateBody(_data)
-      })
-      Body.all.forEach((body) => {
-        if (body !== player && body.lastUpdated < now) {
-          body.destroy()
-        }
       })
       Render.render()
       break

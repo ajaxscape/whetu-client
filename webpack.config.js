@@ -10,7 +10,7 @@ const { ifDevelopment, ifProduction } = getIfUtils(nodeEnv)
 
 module.exports = removeEmpty({
   entry: {
-    js: './src/index.js',
+    js: './index.js',
     css: './src/index.scss'
   },
 

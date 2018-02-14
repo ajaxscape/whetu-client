@@ -1,8 +1,9 @@
 const Render = require('whetu-render')
+const queryString = require('query-string')
 
-const multiplayer = false
+const params = queryString.parse(location.search)
 
-if (multiplayer) {
+if (params.multiplayer) {
   const service = window.expanse.config
 // eslint-disable-next-line no-undef
   const ws = new WebSocket(service)
@@ -38,7 +39,7 @@ if (multiplayer) {
   let radar
 
   const game = require('whetu-engine')
-  game.start()
+  game.start(10)
   const data = game.join()
   id = data.id
 
@@ -58,5 +59,5 @@ if (multiplayer) {
           Render.render()
         })
     }
-  })
+  }, 10)
 }

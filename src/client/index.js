@@ -1,4 +1,4 @@
-const Render = require('whetu-render')
+const Render = require('whetu-render/index')
 const queryString = require('query-string')
 
 const params = queryString.parse(location.search)
@@ -38,7 +38,7 @@ if (params.multiplayer) {
   let viewport
   let radar
 
-  const game = require('whetu-engine')
+  const game = require('whetu-engine/index')
   game.start(10)
   const data = game.join()
   id = data.id

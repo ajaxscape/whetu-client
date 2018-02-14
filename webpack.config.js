@@ -10,8 +10,8 @@ const { ifDevelopment, ifProduction } = getIfUtils(nodeEnv)
 
 module.exports = removeEmpty({
   entry: {
-    js: './index.js',
-    css: './src/index.scss'
+    js: './src/client/index.js',
+    css: './src/client/index.scss'
   },
 
   output: {
@@ -57,13 +57,13 @@ module.exports = removeEmpty({
     new HtmlWebpackPlugin({
       hash: true,
       filename: 'index.html',
-      template: './src/views/index.html',
-      title: 'The Expanse',
+      template: './src/client/views/index.html',
+      title: 'Whetu',
       expanseServer: `${process.env.EXPANSE_SERVICE || 'ws://localhost:40510'}`,
       environment: nodeEnv
     }),
 
-    new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]),
+    new CopyWebpackPlugin([{ from: 'src/client/assets', to: 'assets' }]),
 
     ifProduction(
       new ExtractTextPlugin('[name]-bundle-[hash].css'),

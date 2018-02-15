@@ -1,4 +1,4 @@
-const Render = require('whetu-render/index')
+const Render = require('whetu-render')
 const queryString = require('query-string')
 
 const params = queryString.parse(location.search)

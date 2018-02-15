@@ -34,16 +34,15 @@ module.exports = removeEmpty({
       {
         test: /\.js/,
         use: ['babel-loader?cacheDirectory'],
-        exclude: /node_modules/
+        include:  [/src\/client/, /node_modules/],
+        exclude:  /node_modules\/(?!whetu-engine|!whetu-render)/
       },
       {
         test: /\.worker\.js$/,
         use: {
           loader: 'worker-loader',
           options: {
-            name: 'whetu-engine.[hash].js',
-            inline: true,
-            fallback: false
+            name: 'whetu-engine.[hash].js'
           }
         }
       }

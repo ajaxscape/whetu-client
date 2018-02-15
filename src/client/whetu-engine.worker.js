@@ -1,3 +1,4 @@
+require('babel-polyfill')
 const game = require('whetu-engine')
 
 game.start()

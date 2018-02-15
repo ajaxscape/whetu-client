@@ -4,8 +4,10 @@ const {getIfUtils, removeEmpty} = require('webpack-config-utils')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const nodeEnv = process.env.NODE_ENV || 'development'
+// const nodeEnv = process.env.NODE_ENV || 'production'
 const {ifDevelopment, ifProduction} = getIfUtils(nodeEnv)
 
 module.exports = removeEmpty({
@@ -76,6 +78,7 @@ module.exports = removeEmpty({
     new CopyWebpackPlugin([{from: 'src/client/assets', to: 'assets'}]),
 
     ifProduction(
+      new UglifyJsPlugin(),
       new ExtractTextPlugin('[name]-bundle-[hash].css'),
       new ExtractTextPlugin('[name]-bundle.css')
     )

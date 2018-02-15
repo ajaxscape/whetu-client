@@ -39,6 +39,7 @@
     "shx": "^0.2.2",
     "standard": "^10.0.3",
     "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0",
     "webpack-config-utils": "^2.3.0",
     "webpack-dev-server": "^2.9.7",

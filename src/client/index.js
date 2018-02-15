@@ -5,7 +5,6 @@ const params = queryString.parse(location.search)
 
 if (params.multiplayer) {
   const service = window.expanse.config
-// eslint-disable-next-line no-undef
   const ws = new WebSocket(service)
 // event emmited when connected
   ws.onopen = function () {
@@ -35,7 +34,7 @@ if (params.multiplayer) {
   }
 } else {
   const Worker = require('./whetu-engine.worker')
-  const worker = new Worker();
+  const worker = new Worker()
 
   worker.postMessage({type: 'join'})
   worker.onmessage = function (event) {

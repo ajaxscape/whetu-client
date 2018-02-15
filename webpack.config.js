@@ -34,8 +34,8 @@ module.exports = removeEmpty({
       {
         test: /\.js/,
         use: ['babel-loader?cacheDirectory'],
-        include:  [/src\/client/, /node_modules/],
-        exclude:  /node_modules\/(?!whetu-engine|!whetu-render)/
+        include: [/src\/client/, /node_modules/],
+        exclude: /node_modules\/(?!whetu-engine|!whetu-render|!query-string)/
       },
       {
         test: /\.worker\.js$/,

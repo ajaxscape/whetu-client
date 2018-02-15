@@ -34,30 +34,26 @@ if (params.multiplayer) {
     }
   }
 } else {
-  let id
-  let viewport
-  let radar
+  const Worker = require('./whetu-engine.worker')
+  const worker = new Worker();
 
-  const game = require('whetu-engine/index')
-  game.start(10)
-  const data = game.join()
-  id = data.id
-
-  Render.updatePlayer(data, (data) => {
-    viewport = data.viewport
-    radar = data.radar
-    game.update(data)
-  })
-
-  setInterval(() => {
-    if (id && viewport && radar) {
-      game.state(id, viewport, radar)
-        .then((data) => {
-          data.forEach((_data) => {
-            Render.updateBody(_data)
-          })
-          Render.render()
+  worker.postMessage({type: 'join'})
+  worker.onmessage = function (event) {
+    const {data: {type, data}} = event
+    switch (type) {
+      case 'joined': {
+        Render.updatePlayer(data, (data) => {
+          worker.postMessage({type: 'player', data})
         })
+        break
+      }
+      case 'state': {
+        data.forEach((_data) => {
+          Render.updateBody(_data)
+        })
+        Render.render()
+        break
+      }
     }
-  }, 10)
+  }
 }

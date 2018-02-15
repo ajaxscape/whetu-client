@@ -1,12 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
-const { getIfUtils, removeEmpty } = require('webpack-config-utils')
+const {getIfUtils, removeEmpty} = require('webpack-config-utils')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const nodeEnv = process.env.NODE_ENV || 'development'
-const { ifDevelopment, ifProduction } = getIfUtils(nodeEnv)
+const {ifDevelopment, ifProduction} = getIfUtils(nodeEnv)
 
 module.exports = removeEmpty({
   entry: {
@@ -27,7 +27,7 @@ module.exports = removeEmpty({
           fallback: 'style-loader',
           use: [{
             loader: 'css-loader',
-            options: { url: false }
+            options: {url: false}
           }, 'sass-loader']
         })
       },
@@ -35,6 +35,17 @@ module.exports = removeEmpty({
         test: /\.js/,
         use: ['babel-loader?cacheDirectory'],
         exclude: /node_modules/
+      },
+      {
+        test: /\.worker\.js$/,
+        use: {
+          loader: 'worker-loader',
+          options: {
+            name: 'whetu-engine.[hash].js',
+            inline: true,
+            fallback: false
+          }
+        }
       }
     ]
   },
@@ -63,7 +74,7 @@ module.exports = removeEmpty({
       environment: nodeEnv
     }),
 
-    new CopyWebpackPlugin([{ from: 'src/client/assets', to: 'assets' }]),
+    new CopyWebpackPlugin([{from: 'src/client/assets', to: 'assets'}]),
 
     ifProduction(
       new ExtractTextPlugin('[name]-bundle-[hash].css'),

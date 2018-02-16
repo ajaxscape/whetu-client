@@ -45,6 +45,7 @@ body {
         &::before {
           background-image: url("assets/images/floating-objects/spacecraft.png");
           background-size: contain;
+          background-repeat: no-repeat;
           margin: 4px;
           width: 100px;
           height: 100px;
@@ -85,7 +86,7 @@ body {
             box-shadow: 0 50px 60px rgba(150, 0, 255, 0.5);
           }
           &::before {
-            background-image: url("assets/images/floating-objects/yelship.png");
+            background-image: url("assets/images/floating-objects/alien-1.png");
           }
         }
       }

@@ -4,6 +4,7 @@
   "description": "Client for Whetu",
   "main": "index.js",
   "scripts": {
+    "start": "node src/server",
     "clean": "shx rm -rf public/**",
     "build": "set NODE_ENV=production && node_modules/webpack/bin/webpack.js -p --progress",
     "dev": "webpack-dev-server",

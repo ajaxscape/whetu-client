@@ -3,7 +3,7 @@ const queryString = require('query-string')
 
 const params = queryString.parse(location.search)
 
-if (!params.singlePlayer) {
+if (params.singlePlayer) {
   const Worker = require('./whetu-engine.worker')
   const worker = new Worker()
 
@@ -26,7 +26,9 @@ if (!params.singlePlayer) {
       }
     }
   }
-} else {
+}
+
+if (params.multiPlayer) {
   const service = window.expanse.config
   const ws = new WebSocket(service)
 // event emmited when connected

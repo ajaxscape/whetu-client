@@ -122,6 +122,19 @@ body {
   }
 }
 
+#multi-player-link {
+  top: 1em;
+}
+
+#single-player-link {
+  top: 3em;
+}
+
+.game-link {
+  position: absolute;
+  right: 1em;
+}
+
 #info {
   display: block;
   position: absolute;

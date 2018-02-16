@@ -7,7 +7,7 @@ heartBeat.start()
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
-  res.sendfile(`${__dirname}/views/index.html`)
+  res.sendfile(`${__dirname}/../../client/views/index.html`)
 })
 
 const PORT = process.env.PORT || 5000

@@ -3,7 +3,30 @@ const queryString = require('query-string')
 
 const params = queryString.parse(location.search)
 
-if (params.multiplayer) {
+if (!params.singlePlayer) {
+  const Worker = require('./whetu-engine.worker')
+  const worker = new Worker()
+
+  worker.postMessage({type: 'join'})
+  worker.onmessage = function (event) {
+    const {data: {type, data}} = event
+    switch (type) {
+      case 'joined': {
+        Render.updatePlayer(data, (data) => {
+          worker.postMessage({type: 'player', data})
+        })
+        break
+      }
+      case 'state': {
+        data.forEach((_data) => {
+          Render.updateBody(_data)
+        })
+        Render.render()
+        break
+      }
+    }
+  }
+} else {
   const service = window.expanse.config
   const ws = new WebSocket(service)
 // event emmited when connected
@@ -20,29 +43,6 @@ if (params.multiplayer) {
       case 'joined': {
         Render.updatePlayer(data, (data) => {
           ws.send(JSON.stringify({type: 'player', data}))
-        })
-        break
-      }
-      case 'state': {
-        data.forEach((_data) => {
-          Render.updateBody(_data)
-        })
-        Render.render()
-        break
-      }
-    }
-  }
-} else {
-  const Worker = require('./whetu-engine.worker')
-  const worker = new Worker()
-
-  worker.postMessage({type: 'join'})
-  worker.onmessage = function (event) {
-    const {data: {type, data}} = event
-    switch (type) {
-      case 'joined': {
-        Render.updatePlayer(data, (data) => {
-          worker.postMessage({type: 'player', data})
         })
         break
       }

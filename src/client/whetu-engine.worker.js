@@ -28,4 +28,4 @@ setInterval(async () => {
     const data = await game.state(id, viewport, radar)
     self.postMessage({type: 'state', data})
   }
-})
+}, 50)

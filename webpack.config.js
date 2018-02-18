@@ -12,8 +12,8 @@ const {ifDevelopment, ifProduction} = getIfUtils(nodeEnv)
 module.exports = removeEmpty({
   entry: {
     index: './src/client/index.js',
-    multi: './src/client/multi.js',
-    single: './src/client/single.js',
+    // multi: './src/client/multi.js',
+    // single: './src/client/single.js',
     css: './src/client/index.scss'
   },
 
